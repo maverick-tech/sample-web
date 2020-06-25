@@ -9,14 +9,21 @@ services:
 
 before_install: 
   # login to docker registries (dockerhub + heroku) 
-  - docker login --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD"
+  - wget -qO- https://toolbelt.heroku.com/install.sh | sh
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - echo "$HEROKU_PASSWORD" | docker login -u "$HEROKU_USERNAME" --password-stdin registry.heroku.com 
+
 
 script: 
   - go build
-  - docker build -t manmohantarle/webapp:latest .
+  - docker build -t manmohantarle/webapp .
+  - docker tag manmohantarle/webapp registry.heroku.com/$HEROKU_APP_NAME/web
 
 deploy:
   provider: script
   script:
-   docker push manmohantarle/webapp:latest
-  branch: master
+   docker push manmohantarle/webapp;
+   docker push registry.heroku.com/$HEROKU_APP_NAME/web;
+   heroku container: release web --app $HEROKU_APP_NAME
+  on:
+   branch: master
