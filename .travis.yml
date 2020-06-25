@@ -18,6 +18,5 @@ script:
 deploy:
   provider: script
   script:
-   docker tag webapp:latest webapp:latest
    docker push manmohantarle/webapp:latest
   branch: master
