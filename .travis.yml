@@ -13,7 +13,7 @@ before_install:
 
 script: 
   - go build
-  - docker build -t webapp:latest .
+  - docker build -t manmohantarle/webapp:latest .
 
 deploy:
   provider: script
