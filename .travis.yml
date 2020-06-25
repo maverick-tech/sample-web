@@ -15,8 +15,9 @@ before_install:
 
 
 script: 
-  - go build
+  - export PORT=8080
   - go test
+  - go build
   - docker build -t manmohantarle/webapp .
   - docker tag manmohantarle/webapp registry.heroku.com/$HEROKU_APP_NAME/web
 
