@@ -13,9 +13,11 @@ before_install:
 
 script: 
   - go build
-  - docker build -t webapp .
+  - docker build -t webapp:latest .
+
 deploy:
   provider: script
   script:
+   docker tag webapp:latest manmohantarle/webapp:latest
    docker push manmohantarle/webapp:latest
   branch: master
