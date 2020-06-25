@@ -9,7 +9,7 @@ services:
 
 before_install: 
   # login to docker registries (dockerhub + heroku) 
-  - docker login --username="$ DOCKER_USERNAME" --password="$ DOCKER_PASSWORD"
+  - docker login --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD"
 
 script: 
   - go build
