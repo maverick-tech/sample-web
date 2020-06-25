@@ -16,6 +16,7 @@ before_install:
 
 script: 
   - go build
+  - go test
   - docker build -t manmohantarle/webapp .
   - docker tag manmohantarle/webapp registry.heroku.com/$HEROKU_APP_NAME/web
 
