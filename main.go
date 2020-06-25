@@ -13,10 +13,6 @@ func webHandlerFunc(writer http.ResponseWriter, request *http.Request) {
 func main() {
 	port:=os.Getenv("PORT")
 
-	if port == "" {
-		log.Fatal("$PORT must be set")
-	}
-
 	http.HandleFunc("/", webHandlerFunc)
 	http.ListenAndServe(":" + port, nil)
 }
